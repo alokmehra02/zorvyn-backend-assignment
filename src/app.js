@@ -1,9 +1,9 @@
-const express = require("express");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const helmet = require("helmet");
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import helmet from "helmet";
 
-const routes = require("./routes");
+import routes from "./routes/index.js";
 
 const app = express();
 
@@ -14,4 +14,4 @@ app.use(cookieParser());
 
 app.use("/api", routes);
 
-module.exports = app;
+export default app;

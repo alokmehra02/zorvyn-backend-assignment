@@ -1,13 +1,73 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+
+}
+
+model Role {
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  users     User[]
+
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String  @unique
+  password  String
+  status    UserStatus @default(ACTIVE)
+
+  roleId    Int
+  role      Role @relation(fields: [roleId], references: [id])
+
+  records   FinancialRecord[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+
+  records   FinancialRecord[]
+
+  createdAt DateTime @default(now())
+}
+
+model FinancialRecord {
+  id        Int @id @default(autoincrement())
+
+  amount    Float
+  type      RecordType
+  date      DateTime
+  notes     String?
+
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  createdBy  Int
+  user       User @relation(fields: [createdBy], references: [id])
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([date])
+  @@index([type])
+}
+
+enum RecordType {
+  INCOME
+  EXPENSE
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
 }
