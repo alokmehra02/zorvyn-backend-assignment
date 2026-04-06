@@ -56,6 +56,8 @@ export const loginUser = async (email, password) => {
     throw new ApiError(400, "Invalid credentials");
   }
 
+  delete user.password;
+
   const permissions = ROLE_PERMISSIONS[user.role.name];
 
   const token = generateToken({

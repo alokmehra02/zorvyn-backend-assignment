@@ -47,18 +47,17 @@ GET /api/dashboard/recent-activity
 
 ## Setup
 
-Install dependencies
-
+## Install dependencies
 npm install
 
-Run migrations
-
+## Run migrations
 npx prisma migrate dev
 
-Seed roles
+## Generate prisma client
+npx prisma generate
 
+## Seed roles & categories
 npm run prisma:seed
 
-Start server
-
+## Start server
 npm run dev
