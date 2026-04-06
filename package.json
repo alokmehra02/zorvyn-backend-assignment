@@ -37,6 +37,7 @@
     "morgan": "^1.10.1",
     "mysql2": "^3.20.0",
     "prisma": "^6.19.3",
+    "swagger-ui-express": "^5.0.1",
     "zod": "^4.3.6"
   },
   "devDependencies": {

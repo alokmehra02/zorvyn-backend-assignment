@@ -7,6 +7,10 @@ import dashboardRoutes from "../modules/dashboard/dashboard.routes.js";
 
 const router = express.Router();
 
+router.get("/health", (req, res) => {
+  res.json({ status: "API Running" });
+});
+
 router.use("/auth", authRoutes);
 router.use("/users", userRoutes);
 router.use("/records", recordRoutes);
