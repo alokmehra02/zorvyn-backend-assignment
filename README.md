@@ -50,6 +50,10 @@ GET /api/dashboard/recent-activity
 ## Install dependencies
 npm install
 
+## Create .env file
+cp .env.example .env
+add your database credentials to .env file
+
 ## Run migrations
 npx prisma migrate dev
 
